@@ -1,80 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-
-type Inputs = {
-  name: string;
-};
-
 import axios from "axios";
+import { useQuery } from "react-query";
+import CreateBook from "./api/CreateBook";
 
-type Author = {
-  firstname: string;
-  lastname: string;
-};
-
-type Book = {
-  id: string;
-  name: string;
-  author: Author;
+const getAllbooks = async () => {
+  const res = await axios.get("http://localhost:5000/api/v1/users");
+  return res.data;
 };
 
 const MyComponent = () => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<Book[]>([]);
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { isLoading, data, error } = useQuery("User", getAllbooks);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data: response } = await axios.get(
-          "http://localhost:5000/api/v1/books?author=true"
-        );
-        setData(response);
-      } catch (error) {
-        console.error(error.message);
-      }
-      setLoading(false);
-    };
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
 
-    fetchData();
-  }, []);
-  console.log(data);
+  if (error) {
+    return <p>Sorry something went wrong</p>;
+  }
 
   return (
     <div>
-      {loading && <div>Loading</div>}
-      {!loading && (
-        <div className="p-2 flex flex-col gap-y-2">
-          <h1 className="flex justify-center border ">BOOKS</h1>
-          <div className="border border-black rounded-lg">
-            <ul className="flex flex-col">
-              {data.map((item) => (
-                <ul className="py-1 m-4" key={item.id}>
-                  <li className="">
-                    {item.name}
-                    <br />
-                    {item.author.firstname}-{item.author.lastname}
-                  </li>
-                </ul>
-              ))}
-            </ul>
-          </div>
-          <div className="flex justify-end"></div>
-        </div>
-      )}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4 px-2">
-        <label>Name of the Book : </label>
-        <input
-          {...register("name")}
-          className="border border-black rounded-lg"
-        />
-        <input
-          type="submit"
-          className="rounded border bg-blue-500 hover:bg-blue-800 hover:text-white w-fit px-2"
-        />
-      </form>
+      <div>
+        <ul>
+          {data.map((user: any) => (
+            <li key={user.id}>
+              {user.firstname}
+              {user.lastname}
+              <button className="text-red-500">X</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex justify-center">
+        <CreateBook />
+      </div>
     </div>
   );
 };
