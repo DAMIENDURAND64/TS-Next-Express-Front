@@ -3,7 +3,7 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Inputs } from "../../public/Type";
 
-function PostBook() {
+function CreateUser() {
   const urlPost = "http://localhost:5000/api/v1/users";
 
   const onSubmit: SubmitHandler<Inputs> = (user) => {
@@ -27,7 +27,7 @@ function PostBook() {
   } = useForm<Inputs>();
 
   return (
-    <div className="flex flex-col rounded-lg bg-blue-300 w-3/4 items-center py-2 gap-2 ">
+    <div className="flex flex-col rounded-lg bg-blue-300 w-full items-center py-2 gap-2 h-fit">
       <h1>New User</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -58,4 +58,4 @@ function PostBook() {
   );
 }
 
-export default PostBook;
+export default CreateUser;
