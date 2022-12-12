@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { Inputs } from "../../public/Type";
 
 const getAllCollection = async () => {
-  const res = await axios.get("http://localhost:5000/api/v1/books?collections");
+  const res = await axios.get("http://localhost:5000/api/v1/collections");
   return res.data;
 };
 
@@ -30,7 +30,7 @@ function CreateBook() {
       })
       .then(() => {
         reset();
-        client.invalidateQueries(["Collection"]);
+        client.invalidateQueries(["User"]);
       });
   };
 
