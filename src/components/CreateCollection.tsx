@@ -1,12 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useQueryClient } from "react-query";
 import { Inputs } from "../../public/Type";
 
 function CreateCollection() {
   const urlPost = "http://localhost:5000/api/v1/collections";
-  const client = useQueryClient();
 
   const onSubmit: SubmitHandler<Inputs> = (collection) => {
     axios
@@ -15,7 +13,6 @@ function CreateCollection() {
       })
       .then(() => {
         reset();
-        client.invalidateQueries(["User"]);
       });
   };
 
