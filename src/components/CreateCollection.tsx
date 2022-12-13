@@ -54,7 +54,11 @@ function CreateCollection() {
             {...register("name", { required: true })}
             className="rounded-md"
           />
-          {errors.firstname && <p>Name is required to add a collection</p>}
+          {errors.name && (
+            <p className="text-[10px] text-red-600">
+              Name is required to add a collection
+            </p>
+          )}
 
           <input
             type="submit"

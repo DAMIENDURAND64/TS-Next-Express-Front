@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Book } from "../public/Type";
-import BookItem from "../src/components/Book";
+import BookItem from "../src/components/BookList";
 import CreateBook from "../src/components/CreateBook";
 import CreateCollection from "../src/components/CreateCollection";
 import CreateUser from "../src/components/CreateUser";
