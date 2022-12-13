@@ -16,8 +16,6 @@ function CreateUser() {
       })
       .then((res) => {
         reset(), client.invalidateQueries(["AllUsers"]);
-
-        console.log(res.data);
       });
   };
 

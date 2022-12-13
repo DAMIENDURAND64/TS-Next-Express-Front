@@ -13,6 +13,7 @@ export type Author = {
 
 export type Collection = {
   name: string;
+  id: string;
 };
 
 export type Book = {

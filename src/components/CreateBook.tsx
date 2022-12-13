@@ -15,7 +15,6 @@ function CreateBook() {
   const getAllUsers = async () => {
     const res = await axios.get("http://localhost:5000/api/v1/users");
     const allUsers = res.data;
-    console.log(allUsers);
     return allUsers;
   };
   const { data: allUsers } = useQuery("AllUsers", getAllUsers);

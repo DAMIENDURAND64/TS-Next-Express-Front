@@ -22,7 +22,6 @@ const MyComponent = () => {
   if (error) {
     return <p>Sorry something went wrong</p>;
   }
-  //console.log(data);
   return (
     <div>
       <div className="h-20 bg-blue-600 text-2xl text-white font-bold flex items-center justify-center">
