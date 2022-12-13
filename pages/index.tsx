@@ -14,12 +14,11 @@ async function getAllbooks() {
 }
 
 const MyComponent = () => {
-  const { isLoading, data, error } = useQuery("User", getAllbooks);
+  const { isLoading, data, error } = useQuery("book", getAllbooks);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
-
   if (error) {
     return <p>Sorry something went wrong</p>;
   }

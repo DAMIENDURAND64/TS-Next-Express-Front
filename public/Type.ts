@@ -28,6 +28,6 @@ export type User = {
   lastname: string;
 };
 
-export type name = {
+export type Name = {
   name: string;
 };

@@ -1,8 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useQueryClient } from "react-query";
-import { textChangeRangeIsUnchanged } from "typescript";
-import { Book, name } from "../../public/Type";
+import { Book } from "../../public/Type";
 
 interface IProps {
   book: Book;
@@ -11,10 +10,10 @@ interface IProps {
 function BookItem({ book }: IProps) {
   const client = useQueryClient();
 
-  const deleteBook = async (name: name) => {
+  const deleteBook = async (id: string) => {
     const response = await axios
-      .delete(`http://localhost:5000/api/v1/books/${name}`)
-      .then(() => client.invalidateQueries(["User"]));
+      .delete(`http://localhost:5000/api/v1/books/${id}`)
+      .then(() => client.invalidateQueries(["books"]));
   };
 
   return (

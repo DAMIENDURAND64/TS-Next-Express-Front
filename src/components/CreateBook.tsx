@@ -30,7 +30,7 @@ function CreateBook() {
       })
       .then(() => {
         reset();
-        client.invalidateQueries(["User"]);
+        client.invalidateQueries(["book"]);
       });
   };
 
