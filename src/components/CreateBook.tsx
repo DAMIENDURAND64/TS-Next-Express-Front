@@ -1,25 +1,25 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQuery, useQueryClient } from "react-query";
-import { Inputs } from "../../public/Type";
-
-const getAllCollection = async () => {
-  const res = await axios.get("http://localhost:5000/api/v1/collections");
-  return res.data;
-};
+import { Inputs, User } from "../../public/Type";
 
 function CreateBook() {
   const urlPost = "http://localhost:5000/api/v1/books";
-  const [users, setUsers] = useState([]);
   const client = useQueryClient();
-  const { isLoading, error, data } = useQuery("Collection", getAllCollection);
+  const getAllCollection = async () => {
+    const res = await axios.get("http://localhost:5000/api/v1/collections");
+    return res.data;
+  };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/users")
-      .then((res) => setUsers(res.data));
-  }, []);
+  const getAllUsers = async () => {
+    const res = await axios.get("http://localhost:5000/api/v1/users");
+    const allUsers = res.data;
+    console.log(allUsers);
+    return allUsers;
+  };
+  const { data: allUsers } = useQuery("AllUsers", getAllUsers);
+  const { isLoading, error, data } = useQuery("Collection", getAllCollection);
 
   const onSubmit: SubmitHandler<Inputs> = (book) => {
     axios
@@ -68,7 +68,8 @@ function CreateBook() {
           {...register("authorId", { required: true })}
           className="rounded-md"
         >
-          {users.map((user: any) => (
+          <option></option>
+          {allUsers.map((user: User) => (
             <option value={user.id} key={user.id}>
               {user.firstname}-{user.lastname}
             </option>
@@ -80,6 +81,7 @@ function CreateBook() {
           {...register("collectionId", { required: true })}
           className="rounded-md"
         >
+          <option></option>
           {data.map((collection: any) => (
             <option value={collection.id} key={collection.id}>
               {collection.name}

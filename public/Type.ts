@@ -27,3 +27,7 @@ export type User = {
   firstname: string;
   lastname: string;
 };
+
+export type name = {
+  name: string;
+};

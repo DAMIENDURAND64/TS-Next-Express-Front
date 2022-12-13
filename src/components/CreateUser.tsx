@@ -2,8 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Inputs } from "../../public/Type";
+import { useQueryClient } from "react-query";
 
 function CreateUser() {
+  const client = useQueryClient();
   const urlPost = "http://localhost:5000/api/v1/users";
 
   const onSubmit: SubmitHandler<Inputs> = (user) => {
@@ -13,7 +15,7 @@ function CreateUser() {
         lastname: user.lastname,
       })
       .then((res) => {
-        reset();
+        reset(), client.invalidateQueries(["AllUsers"]);
 
         console.log(res.data);
       });
