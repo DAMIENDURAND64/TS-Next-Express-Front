@@ -41,11 +41,13 @@ function CreateBook() {
   } = useForm<Inputs>();
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <h2 className="text-center font-extrabold">Loading...</h2>;
   }
 
   if (error) {
-    return <p>Sorry something went wrong</p>;
+    return (
+      <h1 className="text-center font-extrabold">Sorry something went wrong</h1>
+    );
   }
   return (
     <div className="flex flex-col rounded-lg bg-blue-300 w-full items-center py-2 gap-2 h-fit">
