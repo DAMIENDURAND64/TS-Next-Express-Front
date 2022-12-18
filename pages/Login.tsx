@@ -10,7 +10,7 @@ const Login = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm<TLogin>();
 
   const onSubmit: SubmitHandler<TLogin> = (value) => console.log(value);
 
